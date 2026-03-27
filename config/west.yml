@@ -4,8 +4,8 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: crystalplanet
       url-base: https://github.com/crystalplanet
-    - name: moergo-sc
-      url-base: https://github.com/moergo-sc
+    - name: urob
+      url-base: https://github.com/urob
   projects:
     - name: eyelash_sofle
       url: https://github.com/a741725193/zmk-sofle
@@ -18,7 +18,7 @@ manifest:
       remote: crystalplanet
       revision: main
     - name: zmk-nodefree-config
-      remote: moergo-sc
+      remote: urob
       revision: main
   self:
     path: boards

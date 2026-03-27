@@ -9,7 +9,10 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
-#include <dt-bindings/zmk/rgb_fx.h>
+
+#ifndef KEYMAP_DRAWER
+#include "eyelash_sofle_rgb.dtsi"
+#endif
 
 &led_strip {
     chain-length = <36>;
@@ -40,51 +43,6 @@
         bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
 
         tap-ms = <100>;
-    };
-
-    led_matrix: led_matrix {
-        compatible = "zmk,led-strip-matrix";
-        led-strip = <&led_strip>;
-        chain-lengths = <36>;
-    };
-
-    rgb_fx {
-        compatible = "zmk,rgb-fx";
-        led-matrix = <&led_matrix>;
-
-        op_sunny: op_sunny {
-            compatible = "zmk,rgb-fx-static";
-            label = "SUNNY";
-            colors = <
-                RGB_COLOR_HSB(45, 100, 50)
-                RGB_COLOR_HSB(45, 100, 50)
-                RGB_COLOR_HSB(45, 100, 50)
-                RGB_COLOR_HSB(45, 100, 50)
-                RGB_COLOR_HSB(45, 100, 50)
-                RGB_COLOR_HSB(45, 100, 50)
-                RGB_COLOR_HSB(45, 100, 50)
-                RGB_COLOR_HSB(0, 100, 50)
-                RGB_COLOR_HSB(120, 100, 50)
-                RGB_COLOR_HSB(30, 100, 50)
-                RGB_COLOR_HSB(60, 100, 50)
-                RGB_COLOR_HSB(240, 100, 50)
-                RGB_COLOR_HSB(240, 100, 10)
-            >;
-        };
-
-        haki: haki {
-            compatible = "zmk,rgb-fx-ripple";
-            label = "HAKI";
-            color-1 = <RGB_COLOR_HSB(0, 100, 50)>;
-            color-2 = <RGB_COLOR_HSB(0, 0, 0)>;
-        };
-
-        gear5: gear5 {
-            compatible = "zmk,rgb-fx-pulse";
-            label = "GEAR5";
-            color-1 = <RGB_COLOR_HSB(0, 0, 100)>;
-            color-2 = <RGB_COLOR_HSB(280, 80, 50)>;
-        };
     };
 
     behaviors {
@@ -136,6 +94,7 @@
             label = "ai_review";
         };
 
+#ifndef KEYMAP_DRAWER
         op_sunny_m: op_sunny_m {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -156,6 +115,7 @@
             bindings = <&rgb_ug RGB_FX_SEL_NODE 2>;
             label = "gear5_m";
         };
+#endif
     };
 
     keymap {

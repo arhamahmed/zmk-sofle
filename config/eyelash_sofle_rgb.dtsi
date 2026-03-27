@@ -1,0 +1,49 @@
+#include <dt-bindings/zmk/rgb_fx.h>
+
+/ {
+    chosen {
+        zmk,underglow = &rgb_fx;
+    };
+
+    led_matrix: led_matrix {
+        compatible = "zmk,led-strip-matrix";
+        led-strip = <&led_strip>;
+        chain-lengths = <36>;
+    };
+
+    rgb_fx: rgb_fx {
+        compatible = "zmk,rgb-fx";
+        drivers = <&led_strip>;
+        chain-lengths = <36>;
+
+        op_sunny: op_sunny {
+            compatible = "zmk,rgb-fx-static";
+            label = "SUNNY";
+            colors = <
+                0xFFD700 0xFFD700 0xFFD700 0xFFD700 0xFFD700 0xFFD700 // 0-5: Underglow Gold
+                0xFFD700                                             // 6: ESC/` Gold
+                0xFF0000                                             // 7: 1 - Luffy Red
+                0x00FF00                                             // 8: 2 - Zoro Green
+                0xFFA500                                             // 9: 3 - Nami Orange
+                0xFFFF00                                             // 10: 4 - Usopp Yellow
+                0x0000FF                                             // 11: 5 - Sanji Blue
+                0x000033 0x000033 0x000033 0x000033 0x000033 0x000033 // Row 1 Base
+                0x000033 0x000033 0x000033 0x000033 0x000033 0x000033 // Row 2 Base
+                0x000033 0x000033 0x000033 0x000033 0x000033 0x000033 // Row 3 Base
+                0x000033 0x000033 0x000033 0x000033 0x000033 0x000033 // Row 4 Base
+            >;
+        };
+
+        haki: haki {
+            compatible = "zmk,rgb-fx-ripple";
+            label = "HAKI";
+            colors = <0xFF0000 0x000000>;
+        };
+
+        gear5: gear5 {
+            compatible = "zmk,rgb-fx-pulse";
+            label = "GEAR5";
+            colors = <0xFFFFFF 0x800080>;
+        };
+    };
+};
