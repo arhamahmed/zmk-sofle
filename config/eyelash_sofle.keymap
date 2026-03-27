@@ -9,6 +9,63 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
+#include <dt-bindings/zmk/rgb_fx.h>
+
+&led_strip {
+    chain-length = <36>;
+};
+
+/ {
+    led_matrix: led_matrix {
+        compatible = "zmk,led-strip-matrix";
+        led-strip = <&led_strip>;
+        chain-lengths = <36>;
+        // 6 Underglow (0-5) + 30 Per-Key (6-35)
+        // Row 0: 6, 7, 8, 9, 10, 11 (Left 1-5)
+        // Row 1: 12, 13, 14, 15, 16, 17
+        // Row 2: 18, 19, 20, 21, 22, 23
+        // Row 3: 24, 25, 26, 27, 28, 29
+        // Row 4: 30, 31, 32, 33, 34, 35
+    };
+
+    rgb_fx {
+        compatible = "zmk,rgb-fx";
+        led-matrix = <&led_matrix>;
+
+        op_sunny: op_sunny {
+            compatible = "zmk,rgb-fx-static";
+            label = "SUNNY";
+            colors = <
+                RGB_COLOR_HSB(45, 100, 50)  // 0-5 (UG Gold)
+                RGB_COLOR_HSB(45, 100, 50)
+                RGB_COLOR_HSB(45, 100, 50)
+                RGB_COLOR_HSB(45, 100, 50)
+                RGB_COLOR_HSB(45, 100, 50)
+                RGB_COLOR_HSB(45, 100, 50)
+                RGB_COLOR_HSB(45, 100, 50)  // 6 (ESC/`)
+                RGB_COLOR_HSB(0, 100, 50)   // 7 (1 - Luffy)
+                RGB_COLOR_HSB(120, 100, 50) // 8 (2 - Zoro)
+                RGB_COLOR_HSB(30, 100, 50)  // 9 (3 - Nami)
+                RGB_COLOR_HSB(60, 100, 50)  // 10 (4 - Usopp)
+                RGB_COLOR_HSB(240, 100, 50) // 11 (5 - Sanji)
+                RGB_COLOR_HSB(240, 100, 10) // 12-35 (Ocean Base)
+            >;
+        };
+
+        haki: haki {
+            compatible = "zmk,rgb-fx-ripple";
+            label = "HAKI";
+            color-1 = <RGB_COLOR_HSB(0, 100, 50)>; // Deep Red
+            color-2 = <RGB_COLOR_HSB(0, 0, 0)>;    // Black
+        };
+
+        gear5: gear5 {
+            compatible = "zmk,rgb-fx-pulse";
+            label = "GEAR5";
+            color-1 = <RGB_COLOR_HSB(0, 0, 100)>;   // White
+            color-2 = <RGB_COLOR_HSB(280, 80, 50)>; // Purple
+        };
+    };
 
 &mmv_input_listener { input-processors = <&zip_xy_scaler 2 1>; };
 
@@ -64,6 +121,48 @@
 
             label = "SHIFT_MCLK";
         };
+
+        rewind: rewind {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp ESC &kp ESC>;
+            label = "rewind";
+        };
+
+        ai_clear: ai_clear {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp FSLH &kp C &kp L &kp E &kp A &kp R &kp ENTER>;
+            label = "ai_clear";
+        };
+
+        ai_review: ai_review {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp FSLH &kp R &kp E &kp V &kp I &kp E &kp W &kp ENTER>;
+            label = "ai_review";
+        };
+
+        op_sunny_m: op_sunny_m {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&rgb_ug RGB_FX_SEL_NODE 0>;
+            label = "op_sunny_m";
+        };
+
+        haki_m: haki_m {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&rgb_ug RGB_FX_SEL_NODE 1>;
+            label = "haki_m";
+        };
+
+        gear5_m: gear5_m {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&rgb_ug RGB_FX_SEL_NODE 2>;
+            label = "gear5_m";
+        };
     };
 
     keymap {
@@ -71,11 +170,11 @@
 
         layer0 {
             bindings = <
-&kp ESC     &kp N1     &kp N2        &kp N3        &kp N4  &kp N5       &kp UP_ARROW     &kp N6     &kp N7     &kp N8     &kp N9           &kp N0      &kp BACKSPACE
-&kp TAB     &kp Q      &kp W         &kp E         &kp R   &kp T        &kp DOWN_ARROW   &kp Y      &kp U      &kp I      &kp O            &kp P       &kp BSLH
-&kp CAPS    &kp A      &kp S         &kp D         &kp F   &kp G        &kp LEFT_ARROW   &kp H      &kp J      &kp K      &kp L            &kp SEMI    &kp APOS
-&kp LSHFT   &kp Z      &kp X         &kp C         &kp V   &kp B        &kp RIGHT_ARROW  &kp N      &kp M      &kp COMMA  &kp DOT          &kp FSLH    &kp ENTER
-&kp C_MUTE  &kp LCTRL  &kp LEFT_GUI  &kp LEFT_ALT  &mo 1   &kp SPACE    &kp ENTER        &kp SPACE  &kp ENTER  &mo 2      &kp RIGHT_SHIFT  &kp DELETE
+&kp GRAVE   &kp N1     &kp N2    &kp N3    &kp N4    &kp N5       &kp UP_ARROW     &kp N6     &kp N7    &kp N8     &kp N9    &kp N0      &kp BACKSPACE
+&kp TAB     &kp Q      &kp W     &kp E     &kp R     &kp T        &kp DOWN_ARROW   &kp Y      &kp U     &kp I      &kp O     &kp P       &kp BSLH
+&kp ESC     &kp A      &kp S     &kp D     &kp F     &kp G        &kp LEFT_ARROW   &kp H      &kp J     &kp K      &kp L     &kp SEMI    &kp APOS
+&kp LSHFT   &kp Z      &kp X     &kp C     &kp V     &kp B        &kp RIGHT_ARROW  &kp N      &kp M     &kp COMMA  &kp DOT   &kp FSLH    &kp ENTER
+&kp C_MUTE  &kp LCTRL  &kp LALT  &mo 1     &mo 2     &kp SPACE    &kp LGUI         &kp SPACE  &kp RGUI  &kp RALT   &kp LBKT  &kp RBKT
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>;
@@ -84,11 +183,11 @@
 
         layer_1 {
             bindings = <
-&kp GRAVE   &kp F1           &kp F2          &kp F3           &kp F4           &kp F5             &mmv MOVE_UP     &kp F6           &kp F7           &kp F8      &kp F9     &kp F10           &trans
-&trans      &kp GRAVE        &mkp LCLK       &mkp MCLK        &mkp RCLK        &mkp MB4           &mmv MOVE_DOWN   &kp PG_UP        &kp END          &kp UP      &kp HOME   &kp MINUS         &kp EQUAL
-&trans      &kp TILDE        &trans          &trans           &trans           &mkp MB5           &mmv MOVE_LEFT   &kp PG_DN        &kp LEFT         &kp DOWN    &kp RIGHT  &kp LEFT_BRACKET  &kp RIGHT_BRACKET
-&trans      &rgb_ug RGB_OFF  &rgb_ug RGB_ON  &rgb_ug RGB_EFF  &rgb_ug RGB_EFR  &rgb_ug RGB_SPI    &mmv MOVE_RIGHT  &rgb_ug RGB_BRI  &rgb_ug RGB_BRD  &kp INSERT  &kp F11    &kp F12           &trans
-&kp C_MUTE  &trans           &trans          &trans           &trans           &trans             &mkp LCLK        &trans           &trans           &trans      &trans     &trans
+&kp GRAVE   &kp F1           &kp F2           &kp F3           &kp F4           &kp F5             &mmv MOVE_UP     &op_sunny_m      &haki_m          &gear5_m         &kp F9           &kp F10          &trans
+&trans      &rgb_ug RGB_ON   &rgb_ug RGB_EFF  &rgb_ug RGB_BRI  &rgb_ug RGB_SPI  &trans             &mmv MOVE_DOWN   &trans           &kp C_PREV       &kp C_PP         &kp C_NEXT       &trans           &trans
+&trans      &rgb_ug RGB_OFF  &rgb_ug RGB_EFR  &rgb_ug RGB_BRD  &rgb_ug RGB_SPD  &trans             &mmv MOVE_LEFT   &trans           &kp C_MUTE       &kp C_VOL_DN     &kp C_VOL_UP     &trans           &trans
+&trans      &trans           &trans           &trans           &trans           &trans             &mmv MOVE_RIGHT  &trans           &trans           &trans           &trans           &trans           &trans
+&kp C_MUTE  &trans           &trans           &trans           &trans           &trans             &mkp LCLK        &trans           &trans           &trans           &trans           &trans
             >;
 
             display-name = "layer1";
@@ -97,11 +196,11 @@
 
         layer_2 {
             bindings = <
-&kp TILDE  &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &mmv MOVE_UP     &kp F6  &kp F7  &kp F8      &kp F9     &kp F10      &trans
-&trans     &bt BT_CLR    &bt BT_CLR_ALL  &trans        &trans        &trans          &mmv MOVE_DOWN   &trans  &trans  &kp F11     &kp F12    &kp UNDER    &kp PLUS
-&trans     &out OUT_USB  &out OUT_BLE    &trans        &trans        &trans          &mmv MOVE_LEFT   &trans  &trans  &trans      &trans     &kp LBRC     &kp RBRC
-&trans     &sys_reset    &trans          &bootloader   &trans        &trans          &mmv MOVE_RIGHT  &trans  &trans  &sys_reset  &soft_off  &bootloader  &trans
-&trans     &trans        &trans          &trans        &trans        &trans          &mkp LCLK        &trans  &trans  &trans      &trans     &trans
+&bt BT_SEL 0 &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_CLR      &bt BT_CLR_ALL  &soft_off          &mmv MOVE_UP     &out OUT_USB    &out OUT_BLE     &trans           &trans           &trans           &trans
+&trans      &kp LG(Q)       &kp LG(W)       &kp LG(SPACE)   &kp LG(R)       &kp LG(T)          &mmv MOVE_DOWN   &kp PG_UP        &rewind          &kp LG(I)        &kp LC(O)        &kp LA(P)        &trans
+&trans      &kp LG(A)       &kp LG(LS(N4))  &kp LG(D)       &kp LG(LC(F))   &kp LC(G)          &mmv MOVE_LEFT   &kp LEFT         &kp DOWN         &kp UP           &kp RIGHT        &kp LG(LC(Q))    &trans
+&trans      &kp LG(Z)       &kp LG(X)       &kp LG(C)       &kp LG(V)       &kp LG(K)          &mmv MOVE_RIGHT  &kp PG_DN        &kp LG(L)        &kp LS(TAB)      &ai_clear        &ai_review       &trans
+&trans      &trans          &trans          &trans          &trans          &kp LA(SPACE)      &mkp LCLK        &trans           &trans           &trans           &trans           &trans
             >;
 
             display-name = "layer2";
