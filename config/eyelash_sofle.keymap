@@ -89,27 +89,6 @@
             bindings = <&kp FSLH &kp R &kp E &kp V &kp I &kp E &kp W &kp ENTER>;
             label = "ai_review";
         };
-
-        op_sunny_m: op_sunny_m {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_COLOR_HSB(45, 100, 50)>;
-            label = "op_sunny_m";
-        };
-
-        haki_m: haki_m {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_COLOR_HSB(0, 100, 50)>;
-            label = "haki_m";
-        };
-
-        gear5_m: gear5_m {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_COLOR_HSB(280, 80, 50)>;
-            label = "gear5_m";
-        };
     };
 
     keymap {
@@ -130,7 +109,7 @@
 
         layer_1 {
             bindings = <
-&kp GRAVE   &kp F1           &kp F2           &kp F3           &kp F4           &kp F5             &mmv MOVE_UP     &op_sunny_m      &haki_m          &gear5_m         &kp F9           &kp F10          &trans
+&kp GRAVE   &kp F1           &kp F2           &kp F3           &kp F4           &kp F5             &mmv MOVE_UP     &rgb_ug RGB_EFF  &rgb_ug RGB_EFR  &rgb_ug RGB_TOG  &kp F9           &kp F10          &trans
 &trans      &rgb_ug RGB_ON   &rgb_ug RGB_EFF  &rgb_ug RGB_BRI  &rgb_ug RGB_SPI  &trans             &mmv MOVE_DOWN   &trans           &kp C_PREV       &kp C_PP         &kp C_NEXT       &trans           &trans
 &trans      &rgb_ug RGB_OFF  &rgb_ug RGB_EFR  &rgb_ug RGB_BRD  &rgb_ug RGB_SPD  &trans             &mmv MOVE_LEFT   &trans           &kp C_MUTE       &kp C_VOL_DN     &kp C_VOL_UP     &trans           &trans
 &trans      &trans           &trans           &trans           &trans           &trans             &mmv MOVE_RIGHT  &trans           &trans           &trans           &trans           &trans           &trans
