@@ -255,6 +255,20 @@ parse_config:
     "&bootloader":
       tap: $$mdi:progress-download$$
 
+    # Custom One Piece & AI Macros
+    "&rewind":
+      tap: $$mdi:rewind$$
+    "&ai_clear":
+      tap: $$mdi:broom$$
+    "&ai_review":
+      tap: $$mdi:eye-check-outline$$
+    "&op_sunny_m":
+      tap: $$mdi:ship-wheel$$
+    "&haki_m":
+      tap: $$mdi:skull-crossbones$$
+    "&gear5_m":
+      tap: $$mdi:cloud-outline$$
+
   # ZMK
   zmk_keycode_map:
     # Symbols
