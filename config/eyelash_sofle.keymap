@@ -95,25 +95,24 @@
         };
 
 #ifndef KEYMAP_DRAWER
-        /* Note: Specific node selection macros replaced with cycles due to build errors */
         op_sunny_m: op_sunny_m {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_EFF>;
+            bindings = <&macro_tap &rgb_ug RGB_EFF>;
             label = "op_sunny_m";
         };
 
         haki_m: haki_m {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_EFF>;
+            bindings = <&macro_tap &rgb_ug RGB_EFF>;
             label = "haki_m";
         };
 
         gear5_m: gear5_m {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_EFF>;
+            bindings = <&macro_tap &rgb_ug RGB_EFF>;
             label = "gear5_m";
         };
 #endif

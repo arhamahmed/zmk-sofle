@@ -16,6 +16,46 @@
         drivers = <&led_strip>;
         chain-lengths = <36>;
 
+        /* Satisfy 'pixels' requirement with a 6x6 grid mapping */
+        pixels = <
+            0   255  /* 0: UG */
+            50  255  /* 1: UG */
+            100 255  /* 2: UG */
+            150 255  /* 3: UG */
+            200 255  /* 4: UG */
+            250 255  /* 5: UG */
+            0   0    /* 6: ESC/` */
+            20  0    /* 7: 1 */
+            40  0    /* 8: 2 */
+            60  0    /* 9: 3 */
+            80  0    /* 10: 4 */
+            100 0    /* 11: 5 */
+            0   20   /* 12: Row 1... */
+            20  20
+            40  20
+            60  20
+            80  20
+            100 20
+            0   40   /* Row 2... */
+            20  40
+            40  40
+            60  40
+            80  40
+            100 40
+            0   60   /* Row 3... */
+            20  60
+            40  60
+            60  60
+            80  60
+            100 60
+            0   80   /* Row 4... */
+            20  80
+            40  80
+            60  80
+            80  80
+            100 80
+        >;
+
         op_sunny: op_sunny {
             compatible = "zmk,rgb-fx-static";
             label = "SUNNY";
@@ -37,13 +77,15 @@
         haki: haki {
             compatible = "zmk,rgb-fx-ripple";
             label = "HAKI";
-            colors = <0xFF0000 0x000000>;
+            color-1 = <0xFF0000>;
+            color-2 = <0x000000>;
         };
 
         gear5: gear5 {
             compatible = "zmk,rgb-fx-pulse";
             label = "GEAR5";
-            colors = <0xFFFFFF 0x800080>;
+            color-1 = <0xFFFFFF>;
+            color-2 = <0x800080>;
         };
     };
 };
