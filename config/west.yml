@@ -4,6 +4,8 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: urob
       url-base: https://github.com/urob
+    - name: crystalplanet
+      url-base: https://github.com/crystalplanet
   projects:
     - name: eyelash_sofle
       url: https://github.com/a741725193/zmk-sofle
@@ -14,6 +16,9 @@ manifest:
       import: app/west.yml
     - name: zmk-nodefree-config
       remote: urob
+      revision: main
+    - name: zmk-rgb-fx
+      remote: crystalplanet
       revision: main
   self:
     path: boards

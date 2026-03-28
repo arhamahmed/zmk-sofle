@@ -1,5 +1,12 @@
 build/
+build_*/
 zmk/
 modules/
 tools/
 .west/
+.cache/
+zephyr/
+zmk-nodefree-config
+zmk-rgb-fx/
+eyelash_sofle/
+.DS_Store

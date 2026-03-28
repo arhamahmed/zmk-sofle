@@ -1,0 +1,111 @@
+/*
+ * RGB FX configuration for Eyelash Sofle - One Piece Themes
+ *
+ * Uses crystalplanet/zmk-rgb-fx module.
+ *
+ * Hardware: 7 WS2812 underglow LEDs per half, arranged in an arc
+ * under the PCB. No per-key RGB LEDs on this board.
+ *
+ * Pixel coordinates represent physical LED positions (0-255 range).
+ * LEDs are spaced roughly evenly along the bottom edge of each half.
+ */
+
+#include <dt-bindings/zmk/rgb_fx.h>
+#include <rgb_fx.dtsi>
+
+/ {
+    chosen {
+        zmk,rgb-fx = &rgb_fx_control;
+    };
+
+    /* Global RGB FX configuration */
+    rgb_fx {
+        compatible = "zmk,rgb-fx";
+        drivers = <&led_strip>;
+        chain-lengths = <7>;
+
+        /*
+         * 7 underglow LEDs arranged in an arc under the PCB.
+         * Positions approximate - spread across the bottom of one half.
+         * x: left-to-right (0=leftmost key column, 255=rightmost)
+         * y: top-to-bottom (0=top row, 255=bottom)
+         */
+        pixels
+            = <&pixel   0  220>   /* 0: far left */
+            , <&pixel  42  240>   /* 1: left-center */
+            , <&pixel  85  250>   /* 2: center-left */
+            , <&pixel 128  255>   /* 3: center */
+            , <&pixel 170  250>   /* 4: center-right */
+            , <&pixel 213  240>   /* 5: right-center */
+            , <&pixel 255  220>   /* 6: far right */
+            ;
+    };
+
+    /* ========================================
+     * Control Group (Theme Switcher)
+     * ======================================== */
+    rgb_fx_control: rgb_fx_control_group {
+        compatible = "zmk,rgb-fx-control-group";
+        fx = <&op_sunny_theme &haki_theme &gear5_theme>;
+        brightness-steps = <5>;
+    };
+
+    /* ========================================
+     * Theme 1: Op Sunny (Thousand Sunny)
+     *
+     * Warm golden glow cycling through ocean-blue accents.
+     * Evokes the Thousand Sunny sailing on the Grand Line.
+     * Slow animated gradient: gold -> ocean blue -> gold.
+     * ======================================== */
+    op_sunny_theme: op_sunny_grad {
+        compatible = "zmk,rgb-fx-linear-gradient";
+        pixels = <0 1 2 3 4 5 6>;
+        colors = <HSL(45, 100, 50) HSL(200, 90, 35) HSL(45, 100, 50)>;
+        angle = <0>;
+        gradient-width = <255>;
+        duration = <6>;
+    };
+
+    /* ========================================
+     * Theme 2: Haki (Armament Haki)
+     *
+     * Deep crimson breathing with dark base.
+     * Slow pulse between dark red and black -
+     * like Haki aura emanating and receding.
+     * ======================================== */
+    haki_theme: haki_solid {
+        compatible = "zmk,rgb-fx-solid";
+        pixels = <0 1 2 3 4 5 6>;
+        colors = <HSL(350, 100, 30) HSL(0, 100, 5)>;
+        duration = <4>;
+    };
+
+    /* ========================================
+     * Theme 3: Gear 5 (Nika Transformation)
+     *
+     * White/purple pulse with sparkle overlay.
+     * Chaotic, energetic - Luffy's awakening.
+     * ======================================== */
+    gear5_theme: gear5_compose {
+        compatible = "zmk,rgb-fx-compose";
+        fx = <&gear5_pulse &gear5_sparkle>;
+    };
+
+    /* White-purple pulsing base */
+    gear5_pulse: gear5_solid {
+        compatible = "zmk,rgb-fx-solid";
+        pixels = <0 1 2 3 4 5 6>;
+        colors = <HSL(280, 80, 50) HSL(0, 0, 95)>;
+        duration = <2>;
+        blending-mode = "normal";
+    };
+
+    /* White/purple sparkles for Nika energy */
+    gear5_sparkle: gear5_spk {
+        compatible = "zmk,rgb-fx-sparkle";
+        pixels = <0 1 2 3 4 5 6>;
+        colors = <HSL(0, 0, 100) HSL(280, 60, 80)>;
+        duration = <2>;
+        blending-mode = "screen";
+    };
+};

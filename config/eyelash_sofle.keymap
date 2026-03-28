@@ -9,9 +9,11 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
+#include <dt-bindings/zmk/rgb_fx.h>
+#include "eyelash_sofle_rgb_fx.dtsi"
 
 &led_strip {
-    chain-length = <36>;
+    chain-length = <7>;
 };
 
 &mmv_input_listener { input-processors = <&zip_xy_scaler 2 1>; };
@@ -90,26 +92,7 @@
             label = "ai_review";
         };
 
-        op_sunny_m: op_sunny_m {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_COLOR_HSB(45, 100, 50)>;
-            label = "op_sunny_m";
-        };
-
-        haki_m: haki_m {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_COLOR_HSB(0, 100, 50)>;
-            label = "haki_m";
-        };
-
-        gear5_m: gear5_m {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_COLOR_HSB(280, 80, 50)>;
-            label = "gear5_m";
-        };
+        /* Theme macros removed - using &rgbfx RGBFX_SELECT directly */
     };
 
     keymap {
@@ -130,11 +113,11 @@
 
         layer_1 {
             bindings = <
-&kp GRAVE   &kp F1           &kp F2           &kp F3           &kp F4           &kp F5             &mmv MOVE_UP     &op_sunny_m      &haki_m          &gear5_m         &kp F9           &kp F10          &trans
-&trans      &rgb_ug RGB_ON   &rgb_ug RGB_EFF  &rgb_ug RGB_BRI  &rgb_ug RGB_SPI  &trans             &mmv MOVE_DOWN   &trans           &kp C_PREV       &kp C_PP         &kp C_NEXT       &trans           &trans
-&trans      &rgb_ug RGB_OFF  &rgb_ug RGB_EFR  &rgb_ug RGB_BRD  &rgb_ug RGB_SPD  &trans             &mmv MOVE_LEFT   &trans           &kp C_MUTE       &kp C_VOL_DN     &kp C_VOL_UP     &trans           &trans
-&trans      &trans           &trans           &trans           &trans           &trans             &mmv MOVE_RIGHT  &trans           &trans           &trans           &trans           &trans           &trans
-&kp C_MUTE  &trans           &trans           &trans           &trans           &trans             &mkp LCLK        &trans           &trans           &trans           &trans           &trans
+&kp GRAVE   &kp F1                    &kp F2                    &kp F3                  &kp F4                  &kp F5                      &mmv MOVE_UP     &rgbfx RGBFX_SELECT(0,0)  &rgbfx RGBFX_SELECT(0,1)  &rgbfx RGBFX_SELECT(0,2)  &kp F9           &kp F10          &trans
+&trans      &rgbfx RGBFX_TOGGLE(0)    &rgbfx RGBFX_NEXT(0)     &rgbfx RGBFX_BRIGHTEN(0) &trans                  &trans                      &mmv MOVE_DOWN   &trans                    &kp C_PREV                &kp C_PP                  &kp C_NEXT       &trans           &trans
+&trans      &trans                    &rgbfx RGBFX_PREVIOUS(0)  &rgbfx RGBFX_DIM(0)     &trans                  &trans                      &mmv MOVE_LEFT   &trans                    &kp C_MUTE                &kp C_VOL_DN              &kp C_VOL_UP     &trans           &trans
+&trans      &trans                    &trans                    &trans                  &trans                  &trans                      &mmv MOVE_RIGHT  &trans                    &trans                    &trans                    &trans           &trans           &trans
+&kp C_MUTE  &trans                    &trans                    &trans                  &trans                  &trans                      &mkp LCLK        &trans                    &trans                    &trans                    &trans           &trans
             >;
 
             display-name = "layer1";
