@@ -73,17 +73,17 @@ layers:
   - F4
   - F5
   - {t: '$$mdi:menu-up$$', s: '$$mdi:mouse$$'}
-  - $$mdi:ship-wheel$$
-  - $$mdi:skull-crossbones$$
-  - $$mdi:cloud-outline$$
+  - '&rgbfx RGBFX_SELECT(0,0)'
+  - '&rgbfx RGBFX_SELECT(0,1)'
+  - '&rgbfx RGBFX_SELECT(0,2)'
   - F9
   - F10
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
-  - RGB ON
-  - RGB EFF
-  - RGB BRI
-  - RGB SPI
+  - '&rgbfx RGBFX_TOGGLE(0)'
+  - '&rgbfx RGBFX_NEXT(0)'
+  - '&rgbfx RGBFX_BRIGHTEN(0)'
+  - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:menu-down$$', s: '$$mdi:mouse$$'}
   - {t: '$$mdi:transfer$$', type: trans}
@@ -93,10 +93,10 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
-  - RGB OFF
-  - RGB EFR
-  - RGB BRD
-  - RGB SPD
+  - {t: '$$mdi:transfer$$', type: trans}
+  - '&rgbfx RGBFX_PREVIOUS(0)'
+  - '&rgbfx RGBFX_DIM(0)'
+  - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:menu-left$$', s: '$$mdi:mouse$$'}
   - {t: '$$mdi:transfer$$', type: trans}
